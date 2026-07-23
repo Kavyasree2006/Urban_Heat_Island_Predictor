@@ -1,0 +1,48 @@
+URBAN HEAT ISLAND MITIGATION REPORT
+==================================================
+
+Total Cities : 500
+
+Heat Risk Distribution
+Heat Risk
+Moderate    255
+High        149
+Low          62
+Extreme      34
+Name: count, dtype: int64
+
+Tree Plantation Recommendations
+Tree Plantation
+High Priority Tree Plantation      213
+Moderate Tree Plantation           183
+Existing Green Cover Sufficient    104
+Name: count, dtype: int64
+
+Green Roof Recommendations
+Green Roof
+Not Required    184
+Optional        167
+Recommended     149
+Name: count, dtype: int64
+
+Cooling Infrastructure Recommendations
+Cooling Infrastructure
+Urban Parks + Shade Structures                             255
+Cooling Centers + Reflective Roads                         149
+Routine Monitoring                                          62
+Cooling Centers + Reflective Pavements + Water Features     34
+Name: count, dtype: int64
+
+Top 10 Highest Risk Locations
+
+ City Name   Latitude   Longitude  Predicted Temperature  Heat Risk Score Heat Risk                 Tree Plantation   Green Roof                                  Cooling Infrastructure  Mitigation Priority
+        40  79.723747 -141.418076              28.476643       100.000000   Extreme   High Priority Tree Plantation  Recommended Cooling Centers + Reflective Pavements + Water Features                    4
+       133  26.933922 -135.253000              27.740980        93.065762   Extreme Existing Green Cover Sufficient Not Required Cooling Centers + Reflective Pavements + Water Features                    4
+       134 -64.891105  -42.879292              27.614931        91.877641   Extreme   High Priority Tree Plantation  Recommended Cooling Centers + Reflective Pavements + Water Features                    4
+       395 -69.984453  -29.242611              27.402114        89.871666   Extreme        Moderate Tree Plantation  Recommended Cooling Centers + Reflective Pavements + Water Features                    4
+       296 -20.501525   21.470519              27.380790        89.670667   Extreme        Moderate Tree Plantation     Optional Cooling Centers + Reflective Pavements + Water Features                    4
+        97  57.099996   25.780568              27.346688        89.349229   Extreme   High Priority Tree Plantation  Recommended Cooling Centers + Reflective Pavements + Water Features                    4
+       181  88.209693  -67.780056              27.288954        88.805035   Extreme Existing Green Cover Sufficient Not Required Cooling Centers + Reflective Pavements + Water Features                    4
+        89   4.456158  111.799199              26.978125        85.875212   Extreme   High Priority Tree Plantation Not Required Cooling Centers + Reflective Pavements + Water Features                    4
+       194  74.383299  -36.976575              26.966289        85.763654   Extreme   High Priority Tree Plantation Not Required Cooling Centers + Reflective Pavements + Water Features                    4
+        28 -70.190654   -5.571725              26.802597        84.220717   Extreme        Moderate Tree Plantation     Optional Cooling Centers + Reflective Pavements + Water Features                    4

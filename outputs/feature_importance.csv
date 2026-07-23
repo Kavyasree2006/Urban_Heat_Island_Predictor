@@ -1,0 +1,15 @@
+Feature,Importance
+Energy Consumption (kWh),0.09523077566649749
+Health Impact (Mortality Rate/100k),0.09144464395421772
+Humidity (%),0.08709619906672497
+Elevation (m),0.08341883357349296
+Latitude,0.07828949444279246
+Wind Speed (km/h),0.07518841661229624
+Longitude,0.07367169303670092
+Air Quality Index (AQI),0.07005562859588883
+Annual Rainfall (mm),0.06904923122639317
+Urban Greenness Ratio (%),0.06774439905272547
+GDP per Capita (USD),0.06501619896056775
+City Name,0.06323866131681112
+Population Density (people/km²),0.06033414062829144
+Land Cover,0.020221683866599532
