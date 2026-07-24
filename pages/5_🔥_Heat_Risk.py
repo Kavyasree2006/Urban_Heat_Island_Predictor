@@ -1,5 +1,6 @@
 import streamlit as st
 import plotly.express as px
+import pandas as pd
 
 from src.loader import load_heat_predictions
 from src.utils import page_title, footer, download_csv
@@ -11,7 +12,6 @@ from src.charts import (
 # ============================================
 # Load Data
 # ============================================
-
 df = load_heat_predictions()
 
 page_title(
@@ -23,6 +23,31 @@ if df.empty:
     st.error("heat_risk_predictions.csv not found in outputs folder.")
     st.stop()
 
+# ---------------------------------------------------
+# Ensure required columns exist
+# ---------------------------------------------------
+
+required_columns = {
+    "Heat Risk": "Unknown",
+    "Heat Risk Score": 0,
+    "Predicted Temperature": 0,
+    "City Name": "Unknown City"
+}
+
+for column, default in required_columns.items():
+    if column not in df.columns:
+        df[column] = default
+
+# Convert numeric columns safely
+df["Heat Risk Score"] = pd.to_numeric(
+    df["Heat Risk Score"],
+    errors="coerce"
+).fillna(0)
+
+df["Predicted Temperature"] = pd.to_numeric(
+    df["Predicted Temperature"],
+    errors="coerce"
+).fillna(0)
 # ============================================
 # KPI Cards
 # ============================================
@@ -144,10 +169,13 @@ st.divider()
 
 st.subheader("Top 20 Highest Heat Risk Areas")
 
-top20 = df.sort_values(
-    by="Heat Risk Score",
-    ascending=False
-).head(20)
+top20 = (
+    df.sort_values(
+        by="Heat Risk Score",
+        ascending=False
+    )
+    .head(20)
+)
 
 st.dataframe(
     top20,
@@ -163,10 +191,21 @@ st.divider()
 
 st.subheader("Predicted Temperature vs Heat Risk")
 
-fig = px.box(
-    df,
-    x="Heat Risk",
-    y="Predicted Temperature",
+if not df.empty:
+
+    fig = px.box(
+        df,
+        x="Heat Risk",
+        y="Predicted Temperature",
+        color="Heat Risk",
+        template="plotly_white",
+        title="Predicted Temperature by Heat Risk"
+    )
+
+    st.plotly_chart(
+        fig,
+        use_container_width=True
+    )
     color="Heat Risk",
     template="plotly_white",
     title="Predicted Temperature by Heat Risk"
@@ -185,14 +224,12 @@ st.divider()
 
 st.subheader("Heat Risk Dataset")
 
+risk_levels = sorted(df["Heat Risk"].dropna().astype(str).unique())
+
 risk_filter = st.multiselect(
-
     "Select Risk Level",
-
-    options=df["Heat Risk"].unique(),
-
-    default=df["Heat Risk"].unique()
-
+    options=risk_levels,
+    default=risk_levels
 )
 
 filtered = df[
