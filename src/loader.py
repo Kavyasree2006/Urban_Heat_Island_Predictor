@@ -74,6 +74,41 @@ def load_model():
 # ============================================================
 
 @st.cache_data
+def load_heat_predictions():
+
+    file = os.path.join(
+        OUTPUT_FOLDER,
+        "heat_risk_predictions.csv"
+    )
+
+    if os.path.exists(file):
+        return pd.read_csv(file)
+
+    return pd.DataFrame()
+
+# ============================================================
+# Cooling Recommendations
+# ============================================================
+
+@st.cache_data
+def load_recommendations():
+
+    file = os.path.join(
+        OUTPUT_FOLDER,
+        "urban_cooling_recommendations.csv"
+    )
+
+    if os.path.exists(file):
+        return pd.read_csv(file)
+
+    return pd.DataFrame()
+
+
+# ============================================================
+# Hotspot Clusters
+# ============================================================
+
+@st.cache_data
 def load_hotspots():
 
     hotspot_file = os.path.join(
@@ -110,41 +145,6 @@ def load_hotspots():
             hotspot_df["Heat Risk Score"] = prediction_df["Heat Risk Score"]
 
     return hotspot_df
-
-# ============================================================
-# Cooling Recommendations
-# ============================================================
-
-@st.cache_data
-def load_recommendations():
-
-    file = os.path.join(
-        OUTPUT_FOLDER,
-        "urban_cooling_recommendations.csv"
-    )
-
-    if os.path.exists(file):
-        return pd.read_csv(file)
-
-    return pd.DataFrame()
-
-
-# ============================================================
-# Hotspot Clusters
-# ============================================================
-
-@st.cache_data
-def load_hotspots():
-
-    file = os.path.join(
-        OUTPUT_FOLDER,
-        "hotspot_clusters.csv"
-    )
-
-    if os.path.exists(file):
-        return pd.read_csv(file)
-
-    return pd.DataFrame()
 
 
 # ============================================================
