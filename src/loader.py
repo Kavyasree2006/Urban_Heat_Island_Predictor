@@ -74,18 +74,42 @@ def load_model():
 # ============================================================
 
 @st.cache_data
-def load_heat_predictions():
+def load_hotspots():
 
-    file = os.path.join(
+    hotspot_file = os.path.join(
+        OUTPUT_FOLDER,
+        "hotspot_clusters.csv"
+    )
+
+    prediction_file = os.path.join(
         OUTPUT_FOLDER,
         "heat_risk_predictions.csv"
     )
 
-    if os.path.exists(file):
-        return pd.read_csv(file)
+    if not os.path.exists(hotspot_file):
+        return pd.DataFrame()
 
-    return pd.DataFrame()
+    hotspot_df = pd.read_csv(hotspot_file)
 
+    if os.path.exists(prediction_file):
+
+        prediction_df = pd.read_csv(prediction_file)
+
+        # Add Heat Risk if missing
+        if (
+            "Heat Risk" not in hotspot_df.columns
+            and "Heat Risk" in prediction_df.columns
+        ):
+            hotspot_df["Heat Risk"] = prediction_df["Heat Risk"]
+
+        # Add Heat Risk Score if missing
+        if (
+            "Heat Risk Score" not in hotspot_df.columns
+            and "Heat Risk Score" in prediction_df.columns
+        ):
+            hotspot_df["Heat Risk Score"] = prediction_df["Heat Risk Score"]
+
+    return hotspot_df
 
 # ============================================================
 # Cooling Recommendations
